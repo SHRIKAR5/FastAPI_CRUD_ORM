@@ -6,9 +6,9 @@ from sqlalchemy.ext.declarative import declarative_base
 Base = declarative_base()
 
 class EmployeeBase(BaseModel):
-    name: str
-    email: str
-    position: str
+    name: str = None
+    email: str = None
+    position: str = None
 
     class Config:
         from_attributes = True
@@ -28,9 +28,9 @@ class EmployeeDB(Base):
     __tablename__ = 'employee' 
 
     id = Column(Integer, primary_key=True, index=True)
-    name = Column(String(255))
-    email = Column(String(255))
-    position = Column(String(255))
+    name = Column(String(255), nullable=True)
+    email = Column(String(255), nullable=True)
+    position = Column(String(255), nullable=True)
 
     # Establish relationship with Company table
     company = relationship("CompanyDB", back_populates="employee")
